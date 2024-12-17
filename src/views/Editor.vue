@@ -1,6 +1,6 @@
 <template>
   <div class="editor-container">
-    <header-nav :title="'logo在线编辑'" @back="$router.back(-1)" />
+    <header-nav :title="'logo在线编辑'" @back="$router.back()" />
 
     <preview-dialog
       @close="closePreviewDialog"
@@ -47,8 +47,9 @@
             color="#1989fa"
           /> -->
           <div v-show="createLogoLoading" class="logoLoading"></div>
-          <svg
+          <component
             ref="svgRef"
+            :is="'svg'"
             baseProfile="full"
             version="1.1"
             :class="'svg' + key"
@@ -965,11 +966,11 @@ export default defineComponent({
 }
 .familyPopover {
   .van-tabs {
-    /deep/ .van-tabs__content {
+    :deep(.van-tabs__content) {
       height: 100px !important;
       overflow: auto;
     }
-    /deep/ .van-tabs__wrap {
+    :deep(.van-tabs__wrap) {
       margin-bottom: 0.5rem;
     }
   }
@@ -1090,7 +1091,7 @@ export default defineComponent({
           margin-right: 1rem;
           display: flex;
           justify-content: space-around;
-          /deep/ .van-popover__wrapper {
+          :deep(.van-popover__wrapper) {
             display: flex;
             justify-content: space-between;
             width: 100%;
@@ -1118,7 +1119,7 @@ export default defineComponent({
         .van-image {
           background: #fff;
           width: 50%;
-          /deep/ img {
+          :deep(img) {
             width: 100%;
             height: 100%;
           }

@@ -22,6 +22,7 @@ export interface TemplateProps {
   randomTitleFamily?: string;
   randomSubTitleFamily?: string;
   len: number;
+  design?: string; // 设计理念
 }
 
 export interface TemplatesProps {

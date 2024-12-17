@@ -6,3 +6,10 @@ declare module '*.vue' {
 }
 declare module "jquery"
 
+import { Router } from '@/routes/index'
+
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $router: Router
+  }
+}

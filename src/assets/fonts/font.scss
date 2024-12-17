@@ -1,3 +1,6 @@
+@use "sass:list";
+@use "sass:map";
+
 $fontUrl: "https://logosvg.oss-cn-chengdu.aliyuncs.com/fonts/";
 $allFonts: (
   (family: 'hyfx', ext: '.TTF'),
@@ -22,10 +25,10 @@ $allFonts: (
   font-style: normal;
 }
 
-@for $i from 1 through length($allFonts) {
-  $item: nth($allFonts, $i);
-  $ext: map-get($item, ext );
-  $family: map-get($item, family);
+@for $i from 1 through list.length($allFonts) {
+  $item: list.nth($allFonts, $i);
+  $ext: map.get($item, ext);
+  $family: map.get($item, family);
 
   @font-face {
     font-family: $family;

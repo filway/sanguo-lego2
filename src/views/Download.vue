@@ -1,6 +1,6 @@
 <template>
   <div class="download-container">
-    <header-nav :title="'logo下载'" @back="$router.back(-1)" />
+    <header-nav :title="'logo下载'" @back="$router.back()" />
     <van-row class="content" :style="{ backgroundColor: bgColor }">
       <van-col span="24" v-if="!isSvgCode">
         <div class="logo-box" v-for="(logo, key) in logoList" :key="key">

@@ -8,7 +8,7 @@
       :previewData="previewData"
       @clickDownload="openDownloadDialog"
     ></preview-dialog>
-    <header-nav :title="'Logo结果选择'" @back="$router.back(-1)" />
+    <header-nav :title="'Logo结果选择'" @back="$router.back()" />
     <van-loading
       class="loadingBox"
       v-if="isLoading"
@@ -30,7 +30,8 @@
         v-show="currentPage === key"
       >
         <div class="logo-box">
-          <svg
+          <component
+            :is="'svg'"
             baseProfile="full"
             version="1.1"
             :class="'svg' + key"
