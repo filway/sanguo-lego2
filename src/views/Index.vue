@@ -28,6 +28,7 @@
         :key="key"
         class="card-box"
         v-show="currentPage === key"
+        style="visibility: hidden; position: absolute;"
       >
         <div class="logo-box">
           <component
@@ -110,6 +111,19 @@
       </div>
     </div>
 
+    
+
+    <div v-show="!isLoading" class="select-button" @click="openPreviewDialog(logoList[currentPage].materialId, logoList[currentPage].randomIndex, currentPage)">
+        点击选择此方案
+    </div>
+
+    <div v-show="!isLoading" class="tipsBox">
+      <p class="tips-title">温馨提示:</p>
+      <p>
+        {{ tips }}
+      </p>
+    </div>
+    
     <div class="pageBox" v-show="!isLoading">
       <div class="pagenation-small-box">
         <div
@@ -131,12 +145,7 @@
         </div>
       </div>
     </div>
-    <div v-show="!isLoading" class="tipsBox">
-      <p class="tips-title">温馨提示:</p>
-      <p>
-        {{ tips }}
-      </p>
-    </div>
+
     <span v-html="cp"></span>
     <!-- <img :src="imgBase64" alt="" width="340" /> -->
   </div>
@@ -372,6 +381,19 @@ export default defineComponent({
       }
     }
     // background: url("../assets/img/img_banner.jpg");
+  }
+
+  .select-button {
+    background-color: #0201fd;
+    color: #fff;
+    padding: 3px 6px;
+    width: 120px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 5px;
+    margin: 1rem auto;
+    cursor: pointer;
+    text-align: center;
   }
 
   .tipsBox {
