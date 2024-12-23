@@ -35,7 +35,9 @@ export interface familyExts {
   hkht: string
   kls: string
   douyuf: string
-  hwks: string
+  hwks: string,
+  cn_regular?: string,
+  semibold1217: string,
 }
 export type familyKeys = keyof familyExts
 //布局属性

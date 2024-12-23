@@ -25,9 +25,11 @@ export const allFamily: Required<familyExts> = {
   kls: '.ttf',
   douyuf: '.otf',
   hwks: '.TTF',
+  cn_regular: '.ttf',
+  semibold1217: '.ttf'
 }
 
-export const randomFamily = ['hkht', 'douyuf']
+export const randomFamily = ['semibold1217', 'cn_regular']
 export const randomFamilyText = ['黑体', '斗鱼追光体']
 
 export const fontFamilyArr = [
