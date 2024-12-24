@@ -40,6 +40,7 @@ export interface familyExts {
   semibold1217: string,
 }
 export type familyKeys = keyof familyExts
+
 //布局属性
 export type logoLayoutPropsType = {
   imageX: number //图标的x坐标

@@ -52,6 +52,37 @@
         :key="key"
         v-show="currentPage === key"
       >
+      <!-- 新的效果图构造 -->
+      <div class="svg-wrapper" id="svgContainer" :style="`background-color: #ccc; aspect-ratio: ${item.aspectRatio}`" v-for="(item) in imgNameArrNew" :key="item.id">
+          <svg :class="`logoSvg logoSvg${key}-1`" xmlns="http://www.w3.org/2000/svg" :viewBox="item.viewBox" >
+                <defs>
+                    <filter :id="`colorize1-${key}`">
+                        <feColorMatrix type="matrix" id="colorMatrix1"
+                            :values="convertColorToMatrix(`#${logo.rgb}`)"/>
+                    </filter>
+                    <filter :id="`colorize2-${key}`">
+                        <feColorMatrix type="matrix" id="colorMatrix2"
+                            :values="convertColorToMatrix('#ffffff')"/>
+                    </filter>
+                </defs>
+                
+                <!-- Colorable images -->
+                <image :href="require(`../assets/img/${item.id}/change_1.png`)" width="100%" height="100%" 
+                       preserveAspectRatio="xMidYMid meet" 
+                       :filter="`url(#colorize1-${key})`"/>
+                <image :href="require(`../assets/img/${item.id}/change_2.png`)" width="100%" height="100%" 
+                       preserveAspectRatio="xMidYMid meet" 
+                       :filter="`url(#colorize2-${key})`"/>
+
+
+                <!-- Background image -->
+                <image :href="require(`../assets/img/${item.id}/dt.png`)" width="100%" height="100%" preserveAspectRatio="xMidYMid meet"/>
+
+                <g v-if="key === 0" :transform="`${item.gTransform0}`"></g>
+                <g v-if="key === 1" :transform="`${item.gTransform1}`"></g>
+          </svg>
+      </div>
+
         <div
           :class="`page-bg page-bg-01 page-bg-img page-insert-${key}`"
           :style="
@@ -160,10 +191,11 @@ import useCreateLogo from '@/hooks/useCreateLogo'
 import PreviewDialog from '@/components/PreviewDialog.vue'
 import { SVG } from '@svgdotjs/svg.js'
 import { previewPropsArr } from '../constants/preview.constant'
-import { getSvgHtml, toTop } from '@/helper'
+import { getSvgHtml, toTop, convertColorToMatrix, getSvgHtmlNew } from '@/helper'
 import cheerio from 'cheerio'
 import $ from 'jquery'
 import HeaderNav from '@/components/HeaderNav.vue'
+import { imgNameArrNew } from '@/constants/preview.constant'
 
 
 export default defineComponent({
@@ -261,11 +293,18 @@ export default defineComponent({
       await useCreateLogo(logoList.value)
 
       const svgHtmlArr = getSvgHtml(logoList.value)
+      const svgHtmlArrNew = getSvgHtmlNew(logoList.value)
       svgHtmlArr.forEach((item, index) => {
         for (let k = 0; k < 9; k++) {
           $('.page-screen').eq(index).find('.page-bg-img').eq(k).html(item[k])
         }
       })
+      svgHtmlArrNew.forEach((item, index) => {
+        for (let k = 0; k < 9; k++) {
+          $('.page-screen').eq(index).find('.logoSvg').eq(k).find('g').append(item[k])
+        }
+      })
+
     })
 
     return {
@@ -286,7 +325,9 @@ export default defineComponent({
       bgImgIndexArr,
       title,
       tips,
-      goBack
+      goBack,
+      convertColorToMatrix,
+      imgNameArrNew
     }
   },
 })
@@ -333,6 +374,7 @@ export default defineComponent({
     flex-direction: column;
     align-items: center;
     padding: 0.5rem 1.8rem 0 1.8rem;
+    margin-bottom: 0.5rem;
 
     .page-p {
       opacity: 0.7;
@@ -432,6 +474,22 @@ export default defineComponent({
     margin: 0.8rem 0;
   }
   .page-screen {
+
+    .svg-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden; /* 防止内容溢出 */
+
+      .logoSvg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block; /* 消除间隙 */
+      }
+    }
+
     // animation: zoomIn; /* referring directly to the animation's @keyframe declaration */
     // animation-duration: 2s; /* don't forget to set a duration! */
     img {

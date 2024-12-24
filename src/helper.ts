@@ -15,7 +15,7 @@ import {
 import cheerio from 'cheerio'
 import opentype from 'opentype.js'
 import { SVG } from '@svgdotjs/svg.js'
-import { imgNameArr } from './constants/preview.constant'
+import { imgNameArr, imgNameArrNew } from './constants/preview.constant'
 
 export const materialDownLoad = (
   src: string,
@@ -330,4 +330,51 @@ export const getSvgHtml = (logoList: any[]): any[] => {
     })
   }
   return htmlArr
+}
+
+
+export const getSvgHtmlNew = (logoList: any[]): any[] => {
+  const htmlArr: any[] =
+    logoList.length === 10
+      ? [[], [], [], [], [], [], [], [], [], []]
+      : [[], [], [], [], [], [], [], []]
+  for (let i = 0; i < logoList.length; i++) {
+    const svgObj = SVG(`.svg${i}`)
+    svgObj.node.removeAttribute('xmlns:svgjs')
+    svgObj.node.removeAttribute('svgjs:data')
+    const svg1 = svgObj.svg()
+    //替换掉svgjs:data，否则图片加载不出
+    const p2 = /svgjs:data\s*?=\s*?([‘"])[\s\S]*?\1/g
+    const svg = svg1.replace(p2, '')
+
+    //循环imgNamrArr
+    imgNameArrNew.forEach((imgName, imgIndex) => {
+
+      const $ = cheerio.load(svg, { xml: true })
+
+      $(`.svg-logo${i} svg`).attr('width', '110')
+      $(`.svg-logo${i} svg`).attr('height', '110')
+
+      const parser = new DOMParser()
+      const doc = parser.parseFromString($.html(), 'text/xml')
+      htmlArr[i][imgIndex] = doc.getElementsByClassName(`svg${i}`)[0]
+    })
+  }
+  return htmlArr
+}
+
+
+export const convertColorToMatrix = ( hexColor: string): string => {
+ const r = parseInt(hexColor.substr(1,2), 16) / 255;
+ const g = parseInt(hexColor.substr(3,2), 16) / 255;
+ const b = parseInt(hexColor.substr(5,2), 16) / 255;
+ 
+ const matrix = [
+   r, 0, 0, 0, 0,
+   0, g, 0, 0, 0,
+   0, 0, b, 0, 0,
+   0, 0, 0, 1, 0
+ ].join(' ');
+ 
+  return matrix;
 }

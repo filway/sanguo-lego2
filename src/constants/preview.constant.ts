@@ -106,6 +106,60 @@ export const imgNameArr: imagePropsType[] = [
     mr: '20vw',
   },
 ]
+
+
+/**
+ * <option value="417565">极简风女士卫衣背部</option>
+              <!-- <option value="395158">户外夜晚墙壁发光灯牌</option> -->
+              <option value="405125">极简双色马克杯</option>
+              <option value="417400">极简科技感名片</option>
+              <option value="402739">双色手提袋纸袋打包袋</option>
+              <option value="402543">双色搪瓷杯马克杯</option>
+              <option value="400789">咖啡杯纸杯</option>
+              <option value="403021">家庭办公室桌面</option>
+              <option value="400618">城市户外指路牌路标</option>
+              <option value="419186">室内展厅发布会演讲</option>
+              <option value="373614">社交媒体点赞喜欢样机</option>
+              <option value="400808">日历logo</option>
+              <option value="400457">保温瓶水瓶</option>
+              <option value="399295">日历</option>
+              <option value="398259">餐饮店一次性餐具筷子</option>
+              <option value="417422">圣诞节壁画</option>
+              <option value="395559">宠物猫狗牵引绳袋子</option>
+              <option value="415305">圣诞树圣诞球</option>
+              <option value="412898">团队标语牌手拿气泡卡片</option>
+ */
+export const imgNameArrNew: any[] = [
+  {
+    'id': '417565',
+    'name': '极简风女士卫衣背部',
+    // svgWrapper的aspectRatio
+    'aspectRatio': '400/400',
+    // viewBox
+    'viewBox': '0 0 400 400',
+    // 横版排版的 g标签的 transform 属性
+    'gTransform0': 'matrix(1, 0, 0, 1, 100, 176) scale(0.55)',
+    // 竖版排版的 g标签的 transform 属性
+    'gTransform1': 'matrix(1, 0, 0, 1, 100, 176) scale(0.55)',
+  },
+  {
+    'id': '405125',
+    'name': '极简双色马克杯',
+    'aspectRatio': '375/250',
+    'viewBox': '0 0 375 250',
+    'gTransform0': 'matrix(1, 0.3, 0, 1, 104, 87) scale(0.2)',
+    'gTransform1': 'matrix(1, 0.3, 0, 1, 104, 87) scale(0.2)',
+  },
+  {
+    'id': '417400',
+    'name': '极简科技感名片',
+    'aspectRatio': '375/250',
+    'viewBox': '0 0 375 250',
+    'gTransform0': 'matrix(1, 0.3, 0, 1, 104, 87) scale(0.2)',
+    'gTransform1': 'matrix(1, 0.3, 0, 1, 104, 87) scale(0.2)',
+  }
+]
+
 export const planNameArr: string[] = [
   '一',
   '二',
